@@ -1,13 +1,53 @@
 name: Demo-1
-run-name: ${{github.user}} is trying to understand workflows
+run-name: ${{github.actor}} is trying to understand workflows
 on:
   push:
-    branches:
-      - Juveria
+   branches:
+    - Juveria
 
 
 jobs:
   job-1:
-    runs-on: uuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Hello Juveria!, Job-1 is done."
+
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies.
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff pytest
+          if [ -f requirements.txt ]; then pip install requirements.txt; fi
+          
+#       - name: Lint with ruff
+#         run: |
+#           # stop the build if there are Python syntax errors or undefined names
+#           ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
+#           # default set of ruff rules with GitHub Annotations
+#           ruff --format=github --target-version=py37 .
+      
+#       - name: Test with pytest
+#         run: |
+#           pytest
+
+      - name: Installed python.
+        run: echo "Done python Installation"
+        
+      - name: Check python.
+        run: python --version
+        
+      - name: Running python
+        run: python -c "x=25; y=45; print(x+y)"
+        
+      - name: Running python file
+        run: python Project-4/Hello.py
+        
+      
+         
