@@ -8,6 +8,6 @@ on:
 
 jobs:
   job-1:
-   runs-on: uuntu-latest
+   runs-on: ubuntu-latest
    steps:
     - run: echo "Hello Juveria!, Job-1 is done."
