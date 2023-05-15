@@ -22,3 +22,7 @@ jobs:
 
       - name: Installed python.
         run: echo "Done python Installation"
+        
+      - name: Check python.
+        run: python --version
+         
