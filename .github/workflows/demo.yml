@@ -19,10 +19,22 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+          
+      - name: Install dependencies.
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff pytest
+          if [ -f requirements.txt ]; then pip install requirements.txt; fi
+      
+      - name: Test with pytest
+        run: |
+          pytest
 
       - name: Installed python.
         run: echo "Done python Installation"
         
       - name: Check python.
         run: python --version
+        
+      
          
