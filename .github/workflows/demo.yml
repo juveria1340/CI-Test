@@ -46,5 +46,8 @@ jobs:
       - name: Running python
         run: python -c "x=25; y=45; print(x+y)"
         
+      - name: Running python file
+        run: python Project-4/Hello.py
+        
       
          
