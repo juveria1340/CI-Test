@@ -1,0 +1,27 @@
+Access guide to ALM-05 server:
+
+https://inside-docupedia.bosch.com/confluence/display/DGSApplicationLifecycleManagement/Get+PS-EC+ALM+Server+Access
+
+------------------------------------------------------------------------------------------------------------------
+
+MyRequests - Service Registration (bosch.com)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Bosch devcloud access:
+Request for below in IdM:
+
+BDC_Github_01_org15_member
+
+IDM2BCD_BDC_Github_01_org453_member
+
+BDC_Github_01_org146_member
+
+RB_BoschDevCloud_lab000171_user
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Install docker from IT service portal.
+
+
+
