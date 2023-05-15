@@ -44,7 +44,7 @@ jobs:
         run: python --version
         
       - name: Running python
-        run: python -c "x=25 y=45; print(x+y)"
+        run: python -c "x=25; y=45; print(x+y)"
         
       
          
