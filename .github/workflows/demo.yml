@@ -1,5 +1,5 @@
 name: Demo-1
-run-name: ${{github.user}} is trying to understand workflows
+run-name: ${{github.actor}} is trying to understand workflows
 on:
   push:
     branches:
