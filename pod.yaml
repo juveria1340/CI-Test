@@ -5,6 +5,16 @@ metadata:
 spec:
   containers:
   - name: my-container
-    image: my-image:latest
+    image: my-image: latest
     ports:
     - containerPort: 80
+
+  - name: my-container1
+    image: my-image: latest
+    ports:
+    - containerPort: 83
+
+  - name: my-container2
+    image: my-image: latest
+    ports:
+    - containerPort: 86
