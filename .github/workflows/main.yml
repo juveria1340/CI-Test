@@ -21,3 +21,18 @@ jobs:
         run: |
           container_port=$(python -c "import yaml; print(yaml.load(open('pod.yaml', 'r'))['spec']['containers'][0]['ports'][0]['containerPort'])")
           echo "Container Port: $container_port"
+
+      - name: Extract Container Ports
+        run: |
+            python -c "import yaml; print(yaml.load(open('pod.yaml', 'r'))['spec']['containers'][0]['ports'])"
+        id: container_ports
+
+      - name: SSH into Containers
+        run: |
+          container_ports=$(echo "${{ steps.container_ports.outputs.result }}")
+          for port in $container_ports; do
+          # Replace <your-ssh-command> with your actual SSH command, and use $port as the port number
+          <your-ssh-command> -p $port user@your-server
+          done
+        shell: bash
+
