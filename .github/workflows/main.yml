@@ -19,6 +19,6 @@ jobs:
 
       - name: Extract Container Port
         run: |
-          container_port=$(jq -r '.spec.containers.ports.containerPort' pod.yaml)
+          container_port=$(jq -r '.spec.containers[0].ports[0].containerPort' pod.yaml)
           echo "Container Port: $container_port"
         shell: bash
