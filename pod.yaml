@@ -5,14 +5,14 @@ metadata:
 spec:
   containers:
   - name: my-container
-    image: ubuntu : latest
+    image: ubuntu:latest
     ports:
     - containerPort: 80
   - name: my-container-1
-    image: nginx : latest
+    image: nginx:latest
     ports:
     - containerPort: 83
   - name: my-container-2
-    image: nginx : latest
+    image: nginx:latest
     ports:
     - containerPort: 86
