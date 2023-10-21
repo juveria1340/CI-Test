@@ -19,7 +19,6 @@ jobs:
 
       - name: Extract Container Port
         run: |
-          # Use jq to extract the container port from pod.yaml
-          container_port=$(jq -r '.spec.containers[0].ports[0].containerPort' Project-4/pod.yaml)
+          container_port=$(jq -r '.spec.containers[0].ports[0].containerPort' pod.yaml)
           echo "Container Port: $container_port"
         shell: bash
