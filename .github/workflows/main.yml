@@ -11,12 +11,15 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: read-yaml-file
-        uses: pietrobolcato/action-read-yaml@1.0.0
-        id: read_action_js
-        with:
-          config: ${{ github.workspace }}/demo.yaml
-
-      - name: use-yaml-file
+      - name: Install jq
         run: |
-          echo namespace: ${{ steps.read_action_js.outputs['tutorial.json'] }}
+          sudo apt-get update
+          sudo apt-get install jq -y
+        shell: bash
+
+      - name: Extract Container Port
+        run: |
+          # Use jq to extract the container port from pod.yaml
+          container_port=$(jq -r '.spec.containers[0].ports[0].containerPort' Project-4/pod.yaml)
+          echo "Container Port: $container_port"
+        shell: bash
