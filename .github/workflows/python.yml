@@ -31,7 +31,7 @@ jobs:
         import subprocess
 
         with open('$yaml_file', 'r') as file:
-        data = yaml.safe_load(file)
+          data = yaml.safe_load(file)
 
         container_info = []
 
