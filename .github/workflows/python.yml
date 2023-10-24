@@ -1,0 +1,39 @@
+name: Extract Container Ports with python
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  extract-container-ports:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Extract Container Ports
+      run: |
+        yaml_file="pod.yaml"
+
+        python - <<EOF
+        import yaml
+
+        with open('$yaml_file', 'r') as file:
+          data = yaml.safe_load(file)
+
+        container_ports = []
+
+        if 'spec' in data and 'containers' in data['spec']:
+            for container in data['spec']['containers']:
+              if 'ports' in container and container['ports']:
+                container_ports.append(container['ports'][0]['containerPort'])
+
+        print(container_ports)
+        EOF
