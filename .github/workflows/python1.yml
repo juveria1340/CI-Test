@@ -42,6 +42,8 @@ jobs:
             if container_name and container_ports:
               container_info.append({'name': container_name, 'ports': container_ports})
 
+        print(container_info)
+
         EOF
 
 # for info in container_info:
