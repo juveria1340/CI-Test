@@ -1,4 +1,4 @@
-name: Extract Container Ports with python
+name: Extract Container Info and Issue SSH Commands
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  extract-container-ports:
+  extract-container-info:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,22 +22,27 @@ jobs:
       run: |
         python -m pip install pyyaml
 
-    - name: Extract Container Ports
+    - name: Extract Container Info and Issue SSH Commands
       run: |
         yaml_file="pod.yaml"
 
         python - <<EOF
         import yaml
+        import subprocess
 
         with open('$yaml_file', 'r') as file:
-          data = yaml.safe_load(file)
+        data = yaml.safe_load(file)
 
-        container_ports = []
+        container_info = []
 
         if 'spec' in data and 'containers' in data['spec']:
             for container in data['spec']['containers']:
-              if 'ports' in container and container['ports']:
-                  container_ports.append(container['ports'][0]['containerPort'])
+                container_name = container.get('name', 'Unnamed Container')
+                container_port = container['ports'][0]['containerPort'] if 'ports' in container and container['ports'] else None
+                if container_name and container_port:
+                    container_info.append({'name': container_name, 'port': container_port})
 
-        print(container_ports)
+        # for info in container_info:
+        #     ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{info['port']}'"
+        #     subprocess.run(ssh_command, shell=True)
         EOF
