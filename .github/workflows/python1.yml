@@ -1,0 +1,49 @@
+name: for more than one container ports
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  extract-container-info:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install pyyaml
+      run: |
+        python -m pip install pyyaml
+
+    - name: Extract Container Info and Issue SSH Commands
+      run: |
+        yaml_file="pod.yaml"
+
+        python - <<EOF
+        import yaml
+        import subprocess
+
+        with open('$yaml_file', 'r') as file:
+          data = yaml.safe_load(file)
+
+        container_info = []
+
+        if 'spec' in data and 'containers' in data['spec']:
+          for container in data['spec']['containers']:
+            container_name = container.get('name', 'Unnamed Container')
+            container_ports = [port['containerPort'] for port in container.get('ports', [])] if 'ports' in container else []
+            if container_name and container_ports:
+              container_info.append({'name': container_name, 'ports': container_ports})
+
+# for info in container_info:
+#     for port in info['ports']:
+#         ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{port}'"
+#         subprocess.run(ssh_command, shell=True)
+EOF
