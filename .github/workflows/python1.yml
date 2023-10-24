@@ -46,4 +46,4 @@ jobs:
 #     for port in info['ports']:
 #         ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{port}'"
 #         subprocess.run(ssh_command, shell=True)
-EOF
+       EOF
