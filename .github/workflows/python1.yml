@@ -66,17 +66,17 @@ jobs:
                 for port in container_ports:
                   container_info.append({'name': container_name, 'port': port})
 
-        container_info_dict = {}
+        # container_info_dict = {}
 
-        # Append container_info to container_info_dict
-        for info in container_info:
-          container_name = info['name']
-          if container_name not in container_info_dict:
-            container_info_dict[container_name] = []
+        # # Append container_info to container_info_dict
+        # for info in container_info:
+        #   container_name = info['name']
+        #   if container_name not in container_info_dict:
+        #     container_info_dict[container_name] = []
 
-        container_info_dict[container_name].append({'port': info['port']})
+        # container_info_dict[container_name].append({'port': info['port']})
 
-        print(container_info_dict)
+        # print(container_info_dict)
         print(container_info)
 
         EOF
