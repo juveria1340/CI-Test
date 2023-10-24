@@ -42,6 +42,8 @@ jobs:
                 if container_name and container_port:
                     container_info.append({'name': container_name, 'port': container_port})
 
+        print(container_info)
+
         # for info in container_info:
         #     ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{info['port']}'"
         #     subprocess.run(ssh_command, shell=True)
