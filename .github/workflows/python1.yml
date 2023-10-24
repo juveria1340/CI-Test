@@ -77,7 +77,7 @@ jobs:
 
         container_info_dict[container_name].append({'port': info['port']})
 
-        print(contaier_info_dict)
+        print(container_info_dict )
 # for info in container_info:
 #     for port in info['ports']:
 #         ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{port}'"
