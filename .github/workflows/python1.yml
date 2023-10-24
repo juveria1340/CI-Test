@@ -46,6 +46,38 @@ jobs:
 
         EOF
 
+    - name: Extract Container Info and Issue SSH Commands
+      run: |
+        yaml_file="pod.yaml"
+
+        python - <<EOF
+        import yaml
+        import subprocess
+
+        with open('$yaml_file', 'r') as file:
+          data = yaml.safe_load(file)
+
+        container_info = []
+
+        if 'spec' in data and 'containers' in data['spec']:
+          for container in data['spec']['containers']:
+              ontainer_name = container.get('name', 'Unnamed Container')
+              container_ports = [port['containerPort'] for port in container.get('ports', [])] if 'ports' in container else []
+              if container_name and container_ports:
+              for port in container_ports:
+                container_info.append({'name': container_name, 'port': port})
+
+        container_info_dict = {}
+
+        # Append container_info to container_info_dict
+        for info in container_info:
+          container_name = info['name']
+          if container_name not in container_info_dict:
+            container_info_dict[container_name] = []
+
+        container_info_dict[container_name].append({'port': info['port']})
+
+        print(contaier_info_dict)
 # for info in container_info:
 #     for port in info['ports']:
 #         ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{port}'"
