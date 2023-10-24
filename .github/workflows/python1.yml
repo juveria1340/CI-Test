@@ -44,7 +44,6 @@ jobs:
 
         print(container_info)
 
-        EOF
 
     - name: Extract Container Info and Issue SSH Commands
       run: |
