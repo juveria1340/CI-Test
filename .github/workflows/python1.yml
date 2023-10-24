@@ -21,14 +21,14 @@ jobs:
     - name: Install pyyaml
       run: |
         python -m pip install pyyaml
-
+        
     - name: Extract Container Info and Issue SSH Commands
       run: |
         yaml_file="pod.yaml"
 
         python - <<EOF
         import yaml
-        import subprocess
+        # import subprocess
 
         with open('$yaml_file', 'r') as file:
           data = yaml.safe_load(file)
@@ -42,8 +42,9 @@ jobs:
             if container_name and container_ports:
               container_info.append({'name': container_name, 'ports': container_ports})
 
+        EOF
+
 # for info in container_info:
 #     for port in info['ports']:
 #         ssh_command = f"ssh user@host 'your_command_using_{info['name']}_{port}'"
-#         subprocess.run(ssh_command, shell=True)
-       EOF
+#         subprocess.run(ssh_command, shell=True
