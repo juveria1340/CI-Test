@@ -1,0 +1,44 @@
+name: Extract Container Ports
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  extract-container-ports:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install pyyaml
+      run: |
+        python -m pip install pyyaml
+
+    - name: Extract Container Ports
+      run: |
+        yaml_file="path/to/pod.yaml"
+
+        python - <<EOF
+        import yaml
+
+        with open('$yaml_file', 'r') as file:
+        data = yaml.safe_load(file)
+
+        container_info = []
+
+        if 'spec' in data and 'containers' in data['spec']:
+          for container in data['spec']['containers']:
+            container_name = container.get('name', 'Unnamed Container')
+            container_port = container['ports'][0]['containerPort'] if 'ports' in container and container['ports'] else 'No Port Specified'
+            container_info.append({'name': container_name, 'port': container_port})
+
+        print(container_info)
+        EOF
