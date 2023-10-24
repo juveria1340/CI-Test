@@ -1,4 +1,4 @@
-name: Extract Container Ports
+name: Extract Container Ports and container name
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
 
     - name: Extract Container Ports
       run: |
-        yaml_file="path/to/pod.yaml"
+        yaml_file="pod.yaml"
 
         python - <<EOF
         import yaml
