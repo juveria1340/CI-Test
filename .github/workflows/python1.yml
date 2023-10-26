@@ -1,4 +1,4 @@
-name: for more than one container ports
+name: for more than one container ports (final)
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
         print(container_info)
 
 
-    - name: Extract Container Info and Issue SSH Commands
+    - name: Extract Container Info with each conatiner and corresponding port
       run: |
         yaml_file="pod.yaml"
 
