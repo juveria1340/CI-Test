@@ -37,7 +37,7 @@ jobs:
 
         if 'spec' in data and 'containers' in data['spec']:
           for container in data['spec']['containers']:
-            container_name = container.get('name', 'Unnamed Container')
+            container_name = container.get('name')
             container_ports = [port['containerPort'] for port in container.get('ports', [])] if 'ports' in container else []
             if container_name and container_ports:
               container_info.append({'name': container_name, 'ports': container_ports})
