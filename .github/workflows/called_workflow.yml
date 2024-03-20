@@ -1,0 +1,14 @@
+name: called workflow example
+
+on:
+  workflow_call:
+    inputs:
+      project_name:
+       type: string
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v4
+    - run: echo ${{ inputs.project_name }}
