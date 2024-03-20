@@ -1,0 +1,10 @@
+name: Caller workflow
+
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  call_workflow2:
+    uses:
+    with:
+      project_name: ${{ github.repository.name }}
