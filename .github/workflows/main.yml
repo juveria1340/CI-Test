@@ -1,0 +1,21 @@
+name: Docker Pull and Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-pull-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pull Docker image
+        run: docker pull juveria1340/project_4x:latest
+        # Replace 'your_image:tag' with the name and tag of the Docker image you want to pull
+
+      - name: Run Docker container
+        run: docker run juveria1340/project_4x:latest
+        # Replace 'your_image:tag' with the name and tag of the Docker image you want to run
