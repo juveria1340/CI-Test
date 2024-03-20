@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Pull Docker image
-        run: docker pull juveria1340/project_4x:latest
+        run: docker pull juveria1340/htmlapp:latest
         # Replace 'your_image:tag' with the name and tag of the Docker image you want to pull
 
       - name: Run Docker container
-        run: docker run juveria1340/project_4x:latest
+        run: docker run juveria1340/htmlapp:latest
         # Replace 'your_image:tag' with the name and tag of the Docker image you want to run
