@@ -1,0 +1,58 @@
+name: Conan Package Transfer
+
+on:
+  workflow_dispatch:
+    inputs:
+      existing_remote:
+        description: 'Existing Conan remote URL'
+        required: true
+      destination_remote:
+        description: 'Destination Conan remote URL'
+        required: true
+      api_token:
+        description: 'User API Token'
+        required: true
+      package_reference:
+        description: 'Conan Package Reference'
+        required: true
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Conan
+      run: |
+        python -m pip install conan
+
+    - name: Configure Conan user
+      run: |
+        echo "$API_TOKEN" | conan user -p -r "${{ github.event.inputs.existing_remote }}" myuser
+      env:
+        API_TOKEN: ${{ secrets.API_TOKEN }}
+
+    - name: Download Conan package
+      run: |
+        conan download ${{ github.event.inputs.package_reference }} -r ${{ github.event.inputs.existing_remote }}
+
+    - name: Configure Conan user for destination remote
+      run: |
+        echo "$API_TOKEN" | conan user -p -r "${{ github.event.inputs.destination_remote }}" myuser
+      env:
+        API_TOKEN: ${{ secrets.API_TOKEN }}
+
+    - name: Upload Conan package
+      run: |
+        conan upload ${{ github.event.inputs.package_reference }} --all -r ${{ github.event.inputs.destination_remote }}
+
+    - name: Clear Conan user credentials
+      run: |
+        conan user -c
